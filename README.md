@@ -77,7 +77,7 @@ Crawling
 --------
 rc4CRAWL.sh
 
-	original bash script to test usage on crawl_ADV.py; later renamed rc6CRAWLV.sh and modified for AutoDock crawls in rc5CRAWLAD.sh
+	original bash script to test usage on crawl_ADV.py
 
 rc5CRAWLAD.sh
 
