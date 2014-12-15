@@ -41,11 +41,15 @@ PROCESSING
 Enahanced PDBQT file generation
 -------------------------------
 rc2FAHV.sh
+
 	CFCopt.sh (batchreceptor3.py, generate_vs_results_AD.py)
+
 rc3FAAH.sh
+
 	faah_vina_process_garibaldi00-4.py (generate_vs_results_VINA.py)
 		
 rc2OET1.sh
+
 	faah_vina_process_garibaldi00-O.py (generate_vs_results_VINA.py)
 
 
