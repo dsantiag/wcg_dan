@@ -1,0 +1,112 @@
+wcg_dan
+=======
+
+MGL/TSRI: World Community Grid Files
+
+UTILITY
+-------
+
+batchreceptor.csv	[/home/dsantiag]
+	Contains information on all FA@H experiments
+batchreceptorO.csv	[/home/dsantiag]
+	Contains information on all OET1 experiments
+batchreceptor3.py	[/home/dsantiag/bin/python]
+	input: batch number; output: experiment number
+generate_vs_results_VINA.py	[/gpfs/home/dsantiag/local/MGLTools-1.5.7rc1/MGLToolsPckgs/AutoDockTools/Utilities24]
+	generates enhanced PDBQT files for AD Vina in FA@H and OET1 projects
+generate_vs_results_AD.py	[/gpfs/home/dsantiag/local/MGLTools-1.5.7rc1/MGLToolsPckgs/AutoDockTools/Utilities24]
+	generates enhanced PDBQT files for AutoDock in FA@H project
+
+GENERATION
+----------
+
+[1] 0.023G N2		NIC Diversity Set II
+[2] 0.105G DBFDA	DrugBank and FDA Approved
+[3] 0.804G MB		Maybridge
+[4] 2.6G   OT		Otava
+[5] 3.1G   NF		NCI Plated Set
+[6] 4.1G   AS		Asinex
+[7] 8.0G   CB		Chembridge
+[8] 12G    VM		Vitas-M Labs
+[9] 19G    EN		Enamine
+
+FAAH: AutoDock, FA@H
+--------------------
+
+runPMX.pl	[/home/dsantiag/bin/perl]
+
+	PMX.sh	[/home/dsantiag/bin/bash]
+
+FAHV: Vina, FA@H
+----------------
+
+PVFB_N2.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/nci_div2_pdbqt]
+PVFB_MB.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/Maybridge_2013]
+PVFB_OT.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/otava_Sep2009]
+PVFB_NF.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/full_nci_ALL_TAUTOMERS]
+PVFB_AS.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/asinex_newMay2011_fixed]
+PVFB_CB.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/ChemBridgeFull]
+PVFB_VM.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/VitasMLabs_Feb2012]
+PVFB_EN.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/enamine_052011_pdbqt]
+
+OET1: Vina, Outsmart Ebola Together
+-----------------------------------
+
+genOETvinaN2.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/nci_div2_pdbqt]
+	genOETvinaN2flex.csh
+genOETvinaDBFDA.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/DrugBankFDA20141113]
+	genOETvinaDBFDAflex.csh
+genOETvinaMB.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/Maybridge_2013]
+	genOETvinaMBflex.csh
+genOETvinaOT.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/otava_Sep2009]
+	genOETvinaOTflex.csh
+genOETvinaNF.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/full_nci_ALL_TAUTOMERS]
+	genOETvinaNFflex.csh
+genOETvinaAS.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/asinex_newMay2011_fixed]
+	genOETvinaASflex.csh
+genOETvinaCB.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/ChemBridgeFull]
+	genOETvinaCBflex.csh
+genOETvinaVM.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/VitasMLabs_Feb2012]
+	genOETvinaVMflex.csh
+genOETvinaEN.csh	[mgl3:/export/gridprojects/post_wcg/workspace/WCG5_LIGANDS/Vina/enamine_052011_pdbqt]
+	genOETvinaENflex.csh
+
+ORGANIZATION
+------------
+[mgl3: crontab]
+0 0 * * * /home/dsantiag/bin/bash/faah-ad-phase1.sh
+		binAtracking.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+		binAinputs.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+		batchreceptor3.py		[/home/dsantiag/bin/python]
+
+0 0 * * * /home/dsantiag/bin/bash/faah-vina-phase1.sh
+		binVtracking.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+		binVbatches.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+		binVresults.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+0 0 * * * /home/dsantiag/bin/bash/faah-oet1-phase1.sh
+		binOtracking.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+		binObatches.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+		binOresults.pl (batchreceptor3.py)	[/home/dsantiag/bin/perl]
+
+PROCESSING
+==========
+
+Enahanced PDBQT file generation
+-------------------------------
+rc2FAHV.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	CFCopt.sh (batchreceptor3.py, generate_vs_results_AD.py)	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+rc3FAAH.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	faah_vina_process_garibaldi00-4.py (generate_vs_results_VINA.py)	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+rc2OET1.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	faah_vina_process_garibaldi00-O.py (generate_vs_results_VINA.py)	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+
+Crawling
+--------
+rc4CRAWL.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	original bash script to test usage on crawl_ADV.py
+rc5CRAWLAD.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	crawl_AD.py	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+rc6CRAWLV.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	crawl_ADV.py	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+rc6CRAWLO.sh	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
+	crawl_ADO.py	[garibaldi00:/gpfs/home/dsantiag/workingDir/bin]
