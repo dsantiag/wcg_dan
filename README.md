@@ -16,13 +16,17 @@ batchreceptorO.csv
 
 UTILITY
 =======
-batchreceptor3.py - input: batch number; output: experiment number
+batchreceptor3.py
+
+	input: batch number; output: experiment number
 
 generate_vs_results_VINA.py
 
-generates enhanced PDBQT files for AD Vina in FA@H and OET1 projects
+	generates enhanced PDBQT files for AD Vina in FA@H and OET1 projects
 
-generate_vs_results_AD.py - generates enhanced PDBQT files for AutoDock in FA@H project
+generate_vs_results_AD.py
+
+	generates enhanced PDBQT files for AutoDock in FA@H project
 
 ORGANIZATION
 ------------
