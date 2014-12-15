@@ -1,18 +1,21 @@
 wcg_dan
 =======
 
-MGL/TSRI: World Community Grid
-
-WCG Scripts
-===========
+MGL/TSRI: World Community Grid Files
 
 INFORMATION
 ===========
 README.md
 
+	You are here.
+
 batchreceptor.csv
 
+	Contains information on all FA@H experiments
+
 batchreceptorO.csv
+
+	Contains information on all OET1 experiments
 
 UTILITY
 =======
