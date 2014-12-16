@@ -57,7 +57,7 @@ AADict = {'ASP':'D', 'GLU':'E', 'LYS':'K', 'HIS':'H', 'ARG':'R',
                'PHE':'F', 'TRP':'W', 'TYR':'Y',
                'GLY':'G', 'ALA':'A', 'ILE':'I', 'LEU':'L', 'CYS':'C',
                'MET':'M', 'THR':'T', 'VAL':'V', 'PRO':'P',
-               'HID':'H', 'HIE','H', 'HIP':'H',
+               'HID':'H', 'HIE':'H', 'HIP':'H',
                'ASH':'D', 'GLH':'E',
                'LYN':'K', 'ARN':'R',
                'HOH':'U', 'CL': 'J' }
