@@ -62,11 +62,11 @@ AADict = {'ASP':'D', 'GLU':'E', 'LYS':'K', 'HIS':'H', 'ARG':'R',
                'LYN':'K', 'ARN':'R',
                'HOH':'U', 'CL': 'J' }
 
-ADbatchRE = r'FAHV_(x?)(.+)_([0-9]+)_processed.tgz'
+ADbatchRE = r'OET1_([0-9]+)_(x?)(.+)_processed.tgz'
 ADbatchREPat = re.compile(ADbatchRE)
 
 InterTypes = ('hba', 'hbd', 'mtl','ppi','tpi','vdw')
-InterRE = r'(.*):.+():([A-Z]+[0-9]*)~~(.*):(.+):(.+)'
+InterRE = r'(.*):.+():([A-Z]+[0-9]*.*)~~(.*):(.+):(.+)'
 
 InterREPat = re.compile(InterRE)
 # vdw are different
@@ -259,7 +259,11 @@ def parseADPDBQT_ADV(f):
 # ADVsimple = r'fahv.x([a-zA-Z0-9]+)(_[A-Z0-9]*)*_(ZINC[0-9]+)(_[0-9]*)*_([0-9]+)_out_Vina_VS.pdbqt'
 #ADVsimple = r'fahv.x([a-zA-Z0-9]+)_(.+)_([0-9]+)_out_Vina_VS.pdbqt'
 # OET1 pattern different from FAHV (switch rec and batch)
-ADVsimple = r'fahv.([0-9]+)_x([a-zA-Z0-9]+)_(.+)_out_Vina_VS.pdbqt'
+#ADVsimple = r'fahv.([0-9]+)_x([a-zA-Z0-9]+)_(.+)_out_Vina_VS.pdbqt'
+#ADVsimplePat = re.compile(ADVsimple, re.IGNORECASE)
+
+# oet1.xEBGP_ZINC11681161_1969865857_out_Vina_VS.pdbqt
+ADVsimple = r'oet1.x([a-zA-Z0-9]+)_ZINC([0-9]?_?[0-9])_([0-9])_out_Vina_VS.pdbqt'
 ADVsimplePat = re.compile(ADVsimple, re.IGNORECASE)
 
 def visit_ADV_tgz(tgzPath,exptname,recon,verbose,receptor):
@@ -285,7 +289,7 @@ def visit_ADV_tgz(tgzPath,exptname,recon,verbose,receptor):
     #  FAHV_x3kf0A_0124403_processed/ # (untarred dir)
     #    fahv.x3kf0A_ZINC01569654_1113915765_out_Vina_VS.pdbqt
 
-    procList = glob.glob(tmpDir+'/FAHV*/fahv.*_out_Vina_VS.pdbqt')
+    procList = glob.glob(tmpDir+'/OET1*/oet1.*_out_Vina_VS.pdbqt')
     if verbose:
         print 'visit_ADV_tgz: NTGZ=',len(procList)
         
@@ -303,7 +307,7 @@ def visit_ADV_tgz(tgzPath,exptname,recon,verbose,receptor):
         # dns - use receptor to get ligand
         # example: fahv.x4GW6aINleA_ZINC29590323_491341659_out_Vina_VS.pdbqt
         #proLigandWorkUnit=procf.lstrip('fahv.'+receptor+'_')
-        totalPrefixLen=len('fahv.')+len(receptor)+len('_')
+        totalPrefixLen=len('oet1.')+len(receptor)+len('_')
         proLigandWorkUnit=procf[totalPrefixLen:]
 
         # and then: ZINC29590323_491341659_out_Vina_VS.pdbqt
@@ -538,7 +542,7 @@ def mglTop_visit_ADV(ADV_topDir,outdir,exptList=None,recon=False,verbose=False):
                 tgznow = os.path.split(tgzPath)[1]
                 mpath = ADbatchREPat.match(tgznow)
                 if mpath:
-                    (x, vinarec, vinabatch) = mpath.groups()
+                    (vinabatch, x, vinarec) = mpath.groups()
                 else:
                     print 'mglTop_visit_ADV: bad match?!',tgznow
                     continue
@@ -618,4 +622,3 @@ if __name__ == '__main__':
     #              args.outDir+'ADV_mgl0_profile.txt')
 
     mglTop_visit_ADV(args.ADV_topDir, args.outDir, exptList, verbose=args.verbose)
-
